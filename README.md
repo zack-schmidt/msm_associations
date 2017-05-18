@@ -71,7 +71,7 @@ Let's add the following validation rules to guard our tables against bogus rows 
      - director_id: must be present
      - title: must be present; must be unique in combination with year
      - year: must be integer between 1870 and 2050
-     - duration: must be integer between 0 and 2764800
+     - duration: must be integer between 0 and 2764800, but it can be blank (hint: there is an option `:allow_blank => true`)
      - description: no rules
      - image_url: no rules
 
@@ -102,7 +102,7 @@ For each question, see if you can craft a single Ruby expression that returns th
  1. On the new and edit movie pages, let's give our users a dropdown box to select a director, rather than having to type in a valid ID number. Let's use the `select_tag` view helper method to make this slightly easier than writing the raw HTML `<select>` and `<option>` tags by hand:
 
 ```erb
-<%= select_tag(:director_id, options_from_collection_for_select(Director.all, :id, :name, @movie.director_id), :class => "form-control") %>
+<%= select_tag("director_id", options_from_collection_for_select(Director.all, :id, :name, @movie.director_id), :class => "form-control") %>
 ```
 
  1. Let's also add a link to the new director form in case the director doesn't exist yet.
@@ -180,7 +180,7 @@ So, we should first go through the steps we went through above when we were sett
 1. On the new and edit character pages, let's give our users a dropdown box to select a movie, rather than having to type in a valid ID number. Let's use the `select_tag` view helper method to make this slightly easier than writing the raw HTML `<select>` and `<option>` tags by hand:
 
 ```erb
-<%= select_tag(:movie_id, options_from_collection_for_select(Movie.all, :id, :title, @character.movie_id), :class => "form-control")
+<%= select_tag("movie_id", options_from_collection_for_select(Movie.all, :id, :title, @character.movie_id), :class => "form-control") %>
 ```
 
 1. Let's also add a link to the new movie form in case the movie doesn't exist yet.
